@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new mongoose.Schema({
   thoughtText: { type: String, minlength: 1, maxlength: 280 , required: true, trim: true },
   createdAt: { type: Date, default: Date.now },
   username: { type: String, required: true, trim: true },
-  reactions:
+  reactions: [reactionSchema]
 },
 {
   toJSON: {
@@ -29,4 +30,6 @@ thoughtSchema
 
 const Thought = model('thought', thoughtSchema);
 
-const handleError = (err) => console.error(err);
+module.exports = Thought
+
+//const handleError = (err) => console.error(err);

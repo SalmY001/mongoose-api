@@ -27,6 +27,4 @@ const reactionSchema = new mongoose.Schema({
 
 // Initialize the Thoughts model
 
-const Reaction = model('reaction', reactionSchema);
-
-const handleError = (err) => console.error(err);
+module.exports = reactionSchema

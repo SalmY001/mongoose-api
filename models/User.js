@@ -31,7 +31,9 @@ userSchema
 
 const User = model('user', userSchema);
 
-const handleError = (err) => console.error(err);
+module.exports = User
+
+//const handleError = (err) => console.error(err);
 
 
 
