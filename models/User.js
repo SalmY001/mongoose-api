@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-require('mongoose-type-email');
+//require('mongoose-type-email');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, trim: true },
-  email: { type: mongoose.SchemaTypes.Email, required: true, trim: true },
+  username: { type: String, required: true, trim: true, unique: true },
+  email: { type: String, required: true, trim: true, unique: true },
   lastAccessed: { type: Date, default: Date.now },
-  thoughts: {type: mongoose.Schema.Types.ObjectId, ref: 'Thought'},
-  friends: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  thoughts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Thought'}],
+  friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 },
 {
   toJSON: {
@@ -29,7 +29,7 @@ userSchema
 
 // Initialize the User model
 
-const User = model('user', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User
 

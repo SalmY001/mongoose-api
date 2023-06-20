@@ -28,7 +28,7 @@ thoughtSchema
 
 // Initialize the Thoughts model
 
-const Thought = model('thought', thoughtSchema);
+const Thought = mongoose.model('Thought', thoughtSchema);
 
 module.exports = Thought
 

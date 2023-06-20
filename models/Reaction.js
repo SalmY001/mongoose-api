@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const reactionSchema = new mongoose.Schema({
-  reactionID: {_id: Schema.Types.ObjectId },
+  reactionID: {_id: mongoose.Schema.Types.ObjectId },
   createdAt: { type: Date, default: Date.now },
   username: { type: String, required: true, trim: true },
   reactionBody: { type: String, minlength: 1, maxlength: 280 , required: true, trim: true }
