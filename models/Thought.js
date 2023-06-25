@@ -5,7 +5,8 @@ const thoughtSchema = new mongoose.Schema({
   thoughtText: { type: String, minlength: 1, maxlength: 280 , required: true, trim: true },
   createdAt: { type: Date, default: Date.now },
   username: { type: String, required: true, trim: true },
-  reactions: [reactionSchema]
+  reactions: [reactionSchema],
+  user: { type:mongoose.Schema.Types.ObjectId, ref: 'User'}
 },
 {
   toJSON: {
@@ -30,6 +31,4 @@ thoughtSchema
 
 const Thought = mongoose.model('Thought', thoughtSchema);
 
-module.exports = Thought
-
-//const handleError = (err) => console.error(err);
+module.exports = Thought;

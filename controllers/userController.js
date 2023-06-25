@@ -1,4 +1,28 @@
 const { User, Thought, Reaction } = require('../models');
+const { ObjectId } = require('mongoose').Types;
+
+// Aggregate function to get the number of friends overall
+// const friendCount = async () => {
+//   const numberOfFriends = await User.aggregate()
+//     .count('friendCount');
+//   return numberOfFriends;
+// }
+
+// // Aggregate function for getting the overall grade using $avg
+// const grade = async (studentId) =>
+//   Student.aggregate([
+//     // only include the given student by using $match
+//     { $match: { _id: new ObjectId(studentId) } },
+//     {
+//       $unwind: '$assignments',
+//     },
+//     {
+//       $group: {
+//         _id: new ObjectId(studentId),
+//         overallGrade: { $avg: '$assignments.score' },
+//       },
+//     },
+//   ]);
 
 module.exports = {
   // Get all users
@@ -64,6 +88,49 @@ module.exports = {
 
       if (!user) {
         res.status(404).json({ message: 'No user with this id!' });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+   // Add a friend
+   async addFriend(req, res) {
+    console.log('You are adding a friend');
+    console.log(req.body);
+
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: req.body } },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: 'No user found with that ID' });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  // Remove friend from a user
+  async removeFriend(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { friend: { friendId: req.params.friendId } } },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: 'No user found with that ID :(' });
       }
 
       res.json(user);
