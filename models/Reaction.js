@@ -15,16 +15,6 @@ const reactionSchema = new mongoose.Schema({
 }
 );
 
-// Create a virtual property `friendCount` that records the number of friends
-// reactionSchema
-//   .virtual('reactionCount')
-//   // Getter
-//   .get(function () {
-//     return this.reactions.length;
-//    // return `${this.reactions.length}`;
-
-//   });
-
 // Initialize the Thoughts model
 
 module.exports = reactionSchema;
