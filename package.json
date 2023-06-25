@@ -12,7 +12,7 @@
     "url": "git+https://github.com/SalmY001/mongoose-api.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/SalmY001/mongoose-api/issues"
   },
